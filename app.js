@@ -343,6 +343,11 @@ function openRecipe(recipeId) {
     elements.modal?.showModal();
     state.isModalOpen = true;
 
+    // Reinitialize Lucide icons for modal content
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+
     // Push history entry for modal
     history.pushState({ screen: state.currentScreen, modal: recipeId }, '', '');
 }

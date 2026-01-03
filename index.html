@@ -15,6 +15,8 @@
     <link rel="preload" href="logo.png" as="image">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
     
@@ -34,9 +36,11 @@
                 <h1>Stewart</h1>
                 <h2>Coffee</h2>
             </div>
-            <button class="enter-btn" data-navigate="home" aria-label="Enter the coffee shop">
-                <span class="enter-btn-text">Enter Coffee Shop</span>
-                <span class="enter-btn-icon">☕</span>
+            <button class="enter-btn" data-navigate="menu" aria-label="Enter the coffee shop">
+                <span class="enter-btn-text">Enter</span>
+                <svg class="enter-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
             </button>
         </div>
         <div class="steam steam-1"></div>
@@ -44,24 +48,8 @@
         <div class="steam steam-3"></div>
     </main>
 
-    <!-- Home Screen -->
-    <main id="home" class="screen" data-screen="home" data-parent="landing">
-        <div class="home-content">
-            <img src="logo.png" alt="Stewart Coffee" class="logo" width="180" height="180">
-            <h1>Stewart Family</h1>
-            <p class="tagline">Coffee Recipe Guide</p>
-            <p class="machine-name">Ninja Luxe Café Pro E701</p>
-            <button class="btn-primary" data-navigate="menu" aria-label="Open coffee menu">
-                <span>Open Menu</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </button>
-        </div>
-    </main>
-
     <!-- Main Menu -->
-    <main id="menu" class="screen" data-screen="menu" data-parent="home">
+    <main id="menu" class="screen" data-screen="menu" data-parent="landing">
         <header class="header glass">
             <button class="back-btn" data-navigate="home" aria-label="Go back to home">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -77,37 +65,37 @@
             
             <div class="menu-grid" role="navigation" aria-label="Recipe categories">
                 <button class="menu-card" data-navigate="basics" aria-label="Quick Start guide">
-                    <div class="card-icon" aria-hidden="true">📖</div>
+                    <div class="card-icon" aria-hidden="true"><i data-lucide="book-open"></i></div>
                     <h3>Quick Start</h3>
                     <p>Machine basics & tips</p>
                 </button>
                 
                 <button class="menu-card" data-navigate="staples" aria-label="Daily staple recipes">
-                    <div class="card-icon" aria-hidden="true">☕</div>
+                    <div class="card-icon" aria-hidden="true"><i data-lucide="coffee"></i></div>
                     <h3>Daily Staples</h3>
                     <p>Latte, Cappuccino & more</p>
                 </button>
                 
                 <button class="menu-card" data-navigate="specialty" aria-label="Specialty hot drinks">
-                    <div class="card-icon" aria-hidden="true">✨</div>
+                    <div class="card-icon" aria-hidden="true"><i data-lucide="sparkles"></i></div>
                     <h3>Specialty Hot</h3>
                     <p>Mocha, Cortado & more</p>
                 </button>
                 
                 <button class="menu-card" data-navigate="iced" aria-label="Iced and cold brew drinks">
-                    <div class="card-icon" aria-hidden="true">🧊</div>
+                    <div class="card-icon" aria-hidden="true"><i data-lucide="snowflake"></i></div>
                     <h3>Iced & Cold Brew</h3>
                     <p>Refreshing cold drinks</p>
                 </button>
                 
                 <button class="menu-card" data-navigate="frappes" aria-label="Frappé recipes">
-                    <div class="card-icon" aria-hidden="true">🥤</div>
+                    <div class="card-icon" aria-hidden="true"><i data-lucide="cup-soda"></i></div>
                     <h3>Frappés</h3>
                     <p>Blended frozen treats</p>
                 </button>
                 
                 <button class="menu-card" data-navigate="reference" aria-label="Quick reference guide">
-                    <div class="card-icon" aria-hidden="true">📊</div>
+                    <div class="card-icon" aria-hidden="true"><i data-lucide="gauge"></i></div>
                     <h3>Quick Reference</h3>
                     <p>Settings & measurements</p>
                 </button>
@@ -130,7 +118,7 @@
         <div class="content">
             <article class="tip-card important">
                 <div class="tip-header">
-                    <span class="tip-icon" aria-hidden="true">⚡</span>
+                    <span class="tip-icon" aria-hidden="true"><i data-lucide="zap"></i></span>
                     <h3>The Shift-Up Rule</h3>
                 </div>
                 <p>Low-fat plant milks lack dairy's surfactants. <strong>Ignore Settings 1 & 2!</strong></p>
@@ -142,7 +130,7 @@
             
             <article class="tip-card warning">
                 <div class="tip-header">
-                    <span class="tip-icon" aria-hidden="true">🫘</span>
+                    <span class="tip-icon" aria-hidden="true"><i data-lucide="bean"></i></span>
                     <h3>Soy Tempering Protocol</h3>
                 </div>
                 <p>To prevent curdling, add <strong>20ml soy milk</strong> to your cup <strong>before</strong> brewing coffee. This buffers the acidity.</p>
@@ -150,7 +138,7 @@
             
             <article class="tip-card">
                 <div class="tip-header">
-                    <span class="tip-icon" aria-hidden="true">🍯</span>
+                    <span class="tip-icon" aria-hidden="true"><i data-lucide="candy"></i></span>
                     <h3>Customisation Tips</h3>
                 </div>
                 <ul>
@@ -201,8 +189,8 @@
                     <span class="recipe-tag">Classic</span>
                 </div>
                 <div class="recipe-quick">
-                    <span>☕ Double Espresso</span>
-                    <span>🥛 180ml · Setting 3</span>
+                    <span><i data-lucide="coffee" class="inline-icon"></i> Double Espresso</span>
+                    <span><i data-lucide="milk" class="inline-icon"></i> 180ml · Setting 3</span>
                 </div>
             </article>
             
@@ -212,8 +200,8 @@
                     <span class="recipe-tag">Foamy</span>
                 </div>
                 <div class="recipe-quick">
-                    <span>☕ Double Espresso</span>
-                    <span>🥛 150ml · Setting 4</span>
+                    <span><i data-lucide="coffee" class="inline-icon"></i> Double Espresso</span>
+                    <span><i data-lucide="milk" class="inline-icon"></i> 150ml · Setting 4</span>
                 </div>
             </article>
             
@@ -223,8 +211,8 @@
                     <span class="recipe-tag">Smooth</span>
                 </div>
                 <div class="recipe-quick">
-                    <span>☕ Double Espresso</span>
-                    <span>🥛 120ml · Setting 3</span>
+                    <span><i data-lucide="coffee" class="inline-icon"></i> Double Espresso</span>
+                    <span><i data-lucide="milk" class="inline-icon"></i> 120ml · Setting 3</span>
                 </div>
             </article>
             
@@ -234,8 +222,8 @@
                     <span class="recipe-tag">Light</span>
                 </div>
                 <div class="recipe-quick">
-                    <span>☕ Americano Mode (M)</span>
-                    <span>🥛 60ml · Setting 5</span>
+                    <span><i data-lucide="coffee" class="inline-icon"></i> Americano Mode (M)</span>
+                    <span><i data-lucide="milk" class="inline-icon"></i> 60ml · Setting 5</span>
                 </div>
             </article>
         </div>
@@ -262,10 +250,10 @@
                     <span class="recipe-tag hot">Chocolate</span>
                 </div>
                 <div class="recipe-quick">
-                    <span>☕ Rich Brew (M)</span>
-                    <span>🥛 100ml · Setting 3</span>
+                    <span><i data-lucide="coffee" class="inline-icon"></i> Rich Brew (M)</span>
+                    <span><i data-lucide="milk" class="inline-icon"></i> 100ml · Setting 3</span>
                 </div>
-                <div class="recipe-extras">+ 1 tsp Cocoa + 1 tsp Brown Sugar</div>
+                <div class="recipe-extras"><i data-lucide="plus" class="inline-icon-sm"></i> 1 tsp Cocoa + 1 tsp Brown Sugar</div>
             </article>
             
             <article class="recipe-card" data-recipe="toffeenut" role="button" tabindex="0">
@@ -274,10 +262,10 @@
                     <span class="recipe-tag hot">Sweet</span>
                 </div>
                 <div class="recipe-quick">
-                    <span>☕ Double Espresso</span>
-                    <span>🥛 180ml · Setting 4</span>
+                    <span><i data-lucide="coffee" class="inline-icon"></i> Double Espresso</span>
+                    <span><i data-lucide="milk" class="inline-icon"></i> 180ml · Setting 4</span>
                 </div>
-                <div class="recipe-extras">+ 2 pumps SF Toffee Nut</div>
+                <div class="recipe-extras"><i data-lucide="plus" class="inline-icon-sm"></i> 2 pumps SF Toffee Nut</div>
             </article>
             
             <article class="recipe-card" data-recipe="cortado" role="button" tabindex="0">
@@ -286,10 +274,10 @@
                     <span class="recipe-tag hot">Bold</span>
                 </div>
                 <div class="recipe-quick">
-                    <span>☕ Single Espresso</span>
-                    <span>🥛 60ml · Setting 3</span>
+                    <span><i data-lucide="coffee" class="inline-icon"></i> Single Espresso</span>
+                    <span><i data-lucide="milk" class="inline-icon"></i> 60ml · Setting 3</span>
                 </div>
-                <div class="recipe-extras">+ 1 tsp SF Maple Syrup</div>
+                <div class="recipe-extras"><i data-lucide="plus" class="inline-icon-sm"></i> 1 tsp SF Maple Syrup</div>
             </article>
         </div>
     </main>
@@ -313,10 +301,10 @@
                     <span class="recipe-tag cold">Signature</span>
                 </div>
                 <div class="recipe-quick">
-                    <span>☕ Over Ice (M)</span>
-                    <span>🥛 120ml · Setting 5</span>
+                    <span><i data-lucide="coffee" class="inline-icon"></i> Over Ice (M)</span>
+                    <span><i data-lucide="milk" class="inline-icon"></i> 120ml · Setting 5</span>
                 </div>
-                <div class="recipe-extras">+ 2 tbsp Brown Sugar + Ice</div>
+                <div class="recipe-extras"><i data-lucide="plus" class="inline-icon-sm"></i> 2 tbsp Brown Sugar + Ice</div>
             </article>
             
             <article class="recipe-card" data-recipe="vanillacold" role="button" tabindex="0">
@@ -325,10 +313,10 @@
                     <span class="recipe-tag cold">Smooth</span>
                 </div>
                 <div class="recipe-quick">
-                    <span>☕ Cold Brew (M+)</span>
-                    <span>🥛 100ml · Setting 5</span>
+                    <span><i data-lucide="coffee" class="inline-icon"></i> Cold Brew (M+)</span>
+                    <span><i data-lucide="milk" class="inline-icon"></i> 100ml · Setting 5</span>
                 </div>
-                <div class="recipe-extras">+ 1 tbsp SF Vanilla</div>
+                <div class="recipe-extras"><i data-lucide="plus" class="inline-icon-sm"></i> 1 tbsp SF Vanilla</div>
             </article>
             
             <article class="recipe-card" data-recipe="saltedcaramel" role="button" tabindex="0">
@@ -337,10 +325,10 @@
                     <span class="recipe-tag cold">Indulgent</span>
                 </div>
                 <div class="recipe-quick">
-                    <span>☕ Cold Pressed (Double)</span>
-                    <span>🥛 150ml · Setting 5</span>
+                    <span><i data-lucide="coffee" class="inline-icon"></i> Cold Pressed (Double)</span>
+                    <span><i data-lucide="milk" class="inline-icon"></i> 150ml · Setting 5</span>
                 </div>
-                <div class="recipe-extras">+ 1 pump SF Caramel + Sea Salt</div>
+                <div class="recipe-extras"><i data-lucide="plus" class="inline-icon-sm"></i> 1 pump SF Caramel + Sea Salt</div>
             </article>
         </div>
     </main>
@@ -360,7 +348,7 @@
         <div class="content">
             <article class="tip-card">
                 <div class="tip-header">
-                    <span class="tip-icon" aria-hidden="true">🔌</span>
+                    <span class="tip-icon" aria-hidden="true"><i data-lucide="plug"></i></span>
                     <h3>Equipment Needed</h3>
                 </div>
                 <p>Requires an external blender (e.g., Ninja Nutri-Blender) for final processing.</p>
@@ -372,10 +360,10 @@
                     <span class="recipe-tag frappe">Creamy</span>
                 </div>
                 <div class="recipe-quick">
-                    <span>☕ Double Espresso</span>
-                    <span>🥛 150ml · Setting 5</span>
+                    <span><i data-lucide="coffee" class="inline-icon"></i> Double Espresso</span>
+                    <span><i data-lucide="milk" class="inline-icon"></i> 150ml · Setting 5</span>
                 </div>
-                <div class="recipe-extras">+ 1 pump SF Syrup + 1 cup Ice</div>
+                <div class="recipe-extras"><i data-lucide="plus" class="inline-icon-sm"></i> 1 pump SF Syrup + 1 cup Ice</div>
             </article>
             
             <article class="recipe-card" data-recipe="mochafrappe" role="button" tabindex="0">
@@ -384,10 +372,10 @@
                     <span class="recipe-tag frappe">Chocolate</span>
                 </div>
                 <div class="recipe-quick">
-                    <span>☕ Double Espresso</span>
-                    <span>🥛 150ml · Setting 5</span>
+                    <span><i data-lucide="coffee" class="inline-icon"></i> Double Espresso</span>
+                    <span><i data-lucide="milk" class="inline-icon"></i> 150ml · Setting 5</span>
                 </div>
-                <div class="recipe-extras">+ 1 tbsp Cocoa + 1 tsp Brown Sugar + Ice</div>
+                <div class="recipe-extras"><i data-lucide="plus" class="inline-icon-sm"></i> 1 tbsp Cocoa + 1 tsp Brown Sugar + Ice</div>
             </article>
         </div>
     </main>
@@ -479,5 +467,9 @@
     </dialog>
 
     <script src="app.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
