@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#4a2c2a">
+    <meta name="description" content="Stewart Family Coffee Recipe Guide for the Ninja Luxe Café Pro E701">
+    <title>Stewart Coffee | Recipe Guide</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="logo.png" as="image">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <!-- Landing/Splash Screen -->
+    <main id="landing" class="screen active" data-screen="landing">
+        <div class="landing-bg"></div>
+        <div class="landing-content">
+            <div class="landing-logo-container">
+                <img src="logo.png" alt="Stewart Coffee" class="landing-logo" width="220" height="220">
+                <div class="logo-glow"></div>
+            </div>
+            <div class="landing-text">
+                <h1>Stewart</h1>
+                <h2>Coffee</h2>
+            </div>
+            <button class="enter-btn" data-navigate="home" aria-label="Enter the coffee shop">
+                <span class="enter-btn-text">Enter Coffee Shop</span>
+                <span class="enter-btn-icon">☕</span>
+            </button>
+        </div>
+        <div class="steam steam-1"></div>
+        <div class="steam steam-2"></div>
+        <div class="steam steam-3"></div>
+    </main>
+
+    <!-- Home Screen -->
+    <main id="home" class="screen" data-screen="home" data-parent="landing">
+        <div class="home-content">
+            <img src="logo.png" alt="Stewart Coffee" class="logo" width="180" height="180">
+            <h1>Stewart Family</h1>
+            <p class="tagline">Coffee Recipe Guide</p>
+            <p class="machine-name">Ninja Luxe Café Pro E701</p>
+            <button class="btn-primary" data-navigate="menu" aria-label="Open coffee menu">
+                <span>Open Menu</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+    </main>
+
+    <!-- Main Menu -->
+    <main id="menu" class="screen" data-screen="menu" data-parent="home">
+        <header class="header glass">
+            <button class="back-btn" data-navigate="home" aria-label="Go back to home">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <img src="logo.png" alt="Stewart Coffee" class="header-logo" width="44" height="44">
+            <div class="spacer" aria-hidden="true"></div>
+        </header>
+        
+        <div class="menu-content">
+            <h2>What would you like?</h2>
+            
+            <div class="menu-grid" role="navigation" aria-label="Recipe categories">
+                <button class="menu-card" data-navigate="basics" aria-label="Quick Start guide">
+                    <div class="card-icon" aria-hidden="true">📖</div>
+                    <h3>Quick Start</h3>
+                    <p>Machine basics & tips</p>
+                </button>
+                
+                <button class="menu-card" data-navigate="staples" aria-label="Daily staple recipes">
+                    <div class="card-icon" aria-hidden="true">☕</div>
+                    <h3>Daily Staples</h3>
+                    <p>Latte, Cappuccino & more</p>
+                </button>
+                
+                <button class="menu-card" data-navigate="specialty" aria-label="Specialty hot drinks">
+                    <div class="card-icon" aria-hidden="true">✨</div>
+                    <h3>Specialty Hot</h3>
+                    <p>Mocha, Cortado & more</p>
+                </button>
+                
+                <button class="menu-card" data-navigate="iced" aria-label="Iced and cold brew drinks">
+                    <div class="card-icon" aria-hidden="true">🧊</div>
+                    <h3>Iced & Cold Brew</h3>
+                    <p>Refreshing cold drinks</p>
+                </button>
+                
+                <button class="menu-card" data-navigate="frappes" aria-label="Frappé recipes">
+                    <div class="card-icon" aria-hidden="true">🥤</div>
+                    <h3>Frappés</h3>
+                    <p>Blended frozen treats</p>
+                </button>
+                
+                <button class="menu-card" data-navigate="reference" aria-label="Quick reference guide">
+                    <div class="card-icon" aria-hidden="true">📊</div>
+                    <h3>Quick Reference</h3>
+                    <p>Settings & measurements</p>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Quick Start / Basics -->
+    <main id="basics" class="screen" data-screen="basics" data-parent="menu">
+        <header class="header glass">
+            <button class="back-btn" data-navigate="menu" aria-label="Go back to menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <h2 class="header-title">Quick Start</h2>
+            <div class="spacer" aria-hidden="true"></div>
+        </header>
+        
+        <div class="content">
+            <article class="tip-card important">
+                <div class="tip-header">
+                    <span class="tip-icon" aria-hidden="true">⚡</span>
+                    <h3>The Shift-Up Rule</h3>
+                </div>
+                <p>Low-fat plant milks lack dairy's surfactants. <strong>Ignore Settings 1 & 2!</strong></p>
+                <ul>
+                    <li><strong>Setting 3</strong> — Lattes & Flat Whites</li>
+                    <li><strong>Setting 4/5</strong> — Cappuccinos, Cold Foam & Frappés</li>
+                </ul>
+            </article>
+            
+            <article class="tip-card warning">
+                <div class="tip-header">
+                    <span class="tip-icon" aria-hidden="true">🫘</span>
+                    <h3>Soy Tempering Protocol</h3>
+                </div>
+                <p>To prevent curdling, add <strong>20ml soy milk</strong> to your cup <strong>before</strong> brewing coffee. This buffers the acidity.</p>
+            </article>
+            
+            <article class="tip-card">
+                <div class="tip-header">
+                    <span class="tip-icon" aria-hidden="true">🍯</span>
+                    <h3>Customisation Tips</h3>
+                </div>
+                <ul>
+                    <li>Syrups (Vanilla, Caramel, etc.) can be added to any drink</li>
+                    <li>Brown sugar is brewed onto to create a syrup base</li>
+                </ul>
+            </article>
+            
+            <article class="size-chart">
+                <h3>Cup Size Reference</h3>
+                <div class="size-row" role="row">
+                    <span class="size-label">Small (S)</span>
+                    <span class="size-coffee">180ml coffee</span>
+                    <span class="size-milk">100-120ml milk</span>
+                </div>
+                <div class="size-row" role="row">
+                    <span class="size-label">Medium (M)</span>
+                    <span class="size-coffee">235ml coffee</span>
+                    <span class="size-milk">150-180ml milk</span>
+                </div>
+                <div class="size-row" role="row">
+                    <span class="size-label">Medium+ (M+)</span>
+                    <span class="size-coffee">295ml coffee</span>
+                    <span class="size-milk">200-220ml milk</span>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Daily Staples -->
+    <main id="staples" class="screen" data-screen="staples" data-parent="menu">
+        <header class="header glass">
+            <button class="back-btn" data-navigate="menu" aria-label="Go back to menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <h2 class="header-title">Daily Staples</h2>
+            <div class="spacer" aria-hidden="true"></div>
+        </header>
+        
+        <div class="content">
+            <p class="section-intro">Pure daily drivers. Add 1-2 pumps of sugar-free syrup if desired.</p>
+            
+            <article class="recipe-card" data-recipe="latte" role="button" tabindex="0">
+                <div class="recipe-header">
+                    <h3>Standard Latte</h3>
+                    <span class="recipe-tag">Classic</span>
+                </div>
+                <div class="recipe-quick">
+                    <span>☕ Double Espresso</span>
+                    <span>🥛 180ml · Setting 3</span>
+                </div>
+            </article>
+            
+            <article class="recipe-card" data-recipe="cappuccino" role="button" tabindex="0">
+                <div class="recipe-header">
+                    <h3>Standard Cappuccino</h3>
+                    <span class="recipe-tag">Foamy</span>
+                </div>
+                <div class="recipe-quick">
+                    <span>☕ Double Espresso</span>
+                    <span>🥛 150ml · Setting 4</span>
+                </div>
+            </article>
+            
+            <article class="recipe-card" data-recipe="flatwhite" role="button" tabindex="0">
+                <div class="recipe-header">
+                    <h3>Standard Flat White</h3>
+                    <span class="recipe-tag">Smooth</span>
+                </div>
+                <div class="recipe-quick">
+                    <span>☕ Double Espresso</span>
+                    <span>🥛 120ml · Setting 3</span>
+                </div>
+            </article>
+            
+            <article class="recipe-card" data-recipe="americano" role="button" tabindex="0">
+                <div class="recipe-header">
+                    <h3>White Americano</h3>
+                    <span class="recipe-tag">Light</span>
+                </div>
+                <div class="recipe-quick">
+                    <span>☕ Americano Mode (M)</span>
+                    <span>🥛 60ml · Setting 5</span>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Specialty Hot -->
+    <main id="specialty" class="screen" data-screen="specialty" data-parent="menu">
+        <header class="header glass">
+            <button class="back-btn" data-navigate="menu" aria-label="Go back to menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <h2 class="header-title">Specialty Hot</h2>
+            <div class="spacer" aria-hidden="true"></div>
+        </header>
+        
+        <div class="content">
+            <p class="section-intro">Targeted formulations for specific textures and flavour profiles.</p>
+            
+            <article class="recipe-card" data-recipe="mocha" role="button" tabindex="0">
+                <div class="recipe-header">
+                    <h3>"Rich" Cacao-Oat Misto</h3>
+                    <span class="recipe-tag hot">Chocolate</span>
+                </div>
+                <div class="recipe-quick">
+                    <span>☕ Rich Brew (M)</span>
+                    <span>🥛 100ml · Setting 3</span>
+                </div>
+                <div class="recipe-extras">+ 1 tsp Cocoa + 1 tsp Brown Sugar</div>
+            </article>
+            
+            <article class="recipe-card" data-recipe="toffeenut" role="button" tabindex="0">
+                <div class="recipe-header">
+                    <h3>Toffee-Nut "System Override"</h3>
+                    <span class="recipe-tag hot">Sweet</span>
+                </div>
+                <div class="recipe-quick">
+                    <span>☕ Double Espresso</span>
+                    <span>🥛 180ml · Setting 4</span>
+                </div>
+                <div class="recipe-extras">+ 2 pumps SF Toffee Nut</div>
+            </article>
+            
+            <article class="recipe-card" data-recipe="cortado" role="button" tabindex="0">
+                <div class="recipe-header">
+                    <h3>Maple-Soy Cortado</h3>
+                    <span class="recipe-tag hot">Bold</span>
+                </div>
+                <div class="recipe-quick">
+                    <span>☕ Single Espresso</span>
+                    <span>🥛 60ml · Setting 3</span>
+                </div>
+                <div class="recipe-extras">+ 1 tsp SF Maple Syrup</div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Iced & Cold Brew -->
+    <main id="iced" class="screen" data-screen="iced" data-parent="menu">
+        <header class="header glass">
+            <button class="back-btn" data-navigate="menu" aria-label="Go back to menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <h2 class="header-title">Iced & Cold Brew</h2>
+            <div class="spacer" aria-hidden="true"></div>
+        </header>
+        
+        <div class="content">
+            <article class="recipe-card" data-recipe="shaken" role="button" tabindex="0">
+                <div class="recipe-header">
+                    <h3>Brown Sugar Shaken Espresso</h3>
+                    <span class="recipe-tag cold">Signature</span>
+                </div>
+                <div class="recipe-quick">
+                    <span>☕ Over Ice (M)</span>
+                    <span>🥛 120ml · Setting 5</span>
+                </div>
+                <div class="recipe-extras">+ 2 tbsp Brown Sugar + Ice</div>
+            </article>
+            
+            <article class="recipe-card" data-recipe="vanillacold" role="button" tabindex="0">
+                <div class="recipe-header">
+                    <h3>"Zero-G" Vanilla Cold Brew</h3>
+                    <span class="recipe-tag cold">Smooth</span>
+                </div>
+                <div class="recipe-quick">
+                    <span>☕ Cold Brew (M+)</span>
+                    <span>🥛 100ml · Setting 5</span>
+                </div>
+                <div class="recipe-extras">+ 1 tbsp SF Vanilla</div>
+            </article>
+            
+            <article class="recipe-card" data-recipe="saltedcaramel" role="button" tabindex="0">
+                <div class="recipe-header">
+                    <h3>Salted Caramel Cold-Pressed</h3>
+                    <span class="recipe-tag cold">Indulgent</span>
+                </div>
+                <div class="recipe-quick">
+                    <span>☕ Cold Pressed (Double)</span>
+                    <span>🥛 150ml · Setting 5</span>
+                </div>
+                <div class="recipe-extras">+ 1 pump SF Caramel + Sea Salt</div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Frappés -->
+    <main id="frappes" class="screen" data-screen="frappes" data-parent="menu">
+        <header class="header glass">
+            <button class="back-btn" data-navigate="menu" aria-label="Go back to menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <h2 class="header-title">Frappés</h2>
+            <div class="spacer" aria-hidden="true"></div>
+        </header>
+        
+        <div class="content">
+            <article class="tip-card">
+                <div class="tip-header">
+                    <span class="tip-icon" aria-hidden="true">🔌</span>
+                    <h3>Equipment Needed</h3>
+                </div>
+                <p>Requires an external blender (e.g., Ninja Nutri-Blender) for final processing.</p>
+            </article>
+            
+            <article class="recipe-card" data-recipe="velvet" role="button" tabindex="0">
+                <div class="recipe-header">
+                    <h3>"Velvet" Oat Frappé</h3>
+                    <span class="recipe-tag frappe">Creamy</span>
+                </div>
+                <div class="recipe-quick">
+                    <span>☕ Double Espresso</span>
+                    <span>🥛 150ml · Setting 5</span>
+                </div>
+                <div class="recipe-extras">+ 1 pump SF Syrup + 1 cup Ice</div>
+            </article>
+            
+            <article class="recipe-card" data-recipe="mochafrappe" role="button" tabindex="0">
+                <div class="recipe-header">
+                    <h3>Soya Mocha Frappé</h3>
+                    <span class="recipe-tag frappe">Chocolate</span>
+                </div>
+                <div class="recipe-quick">
+                    <span>☕ Double Espresso</span>
+                    <span>🥛 150ml · Setting 5</span>
+                </div>
+                <div class="recipe-extras">+ 1 tbsp Cocoa + 1 tsp Brown Sugar + Ice</div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Quick Reference -->
+    <main id="reference" class="screen" data-screen="reference" data-parent="menu">
+        <header class="header glass">
+            <button class="back-btn" data-navigate="menu" aria-label="Go back to menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <h2 class="header-title">Quick Reference</h2>
+            <div class="spacer" aria-hidden="true"></div>
+        </header>
+        
+        <div class="content">
+            <h3 class="ref-title">Frother Settings for Plant Milk</h3>
+            
+            <article class="setting-card avoid">
+                <div class="setting-number">1 & 2</div>
+                <div class="setting-info">
+                    <strong>❌ Avoid</strong>
+                    <p>Results in flat, hot liquid</p>
+                </div>
+            </article>
+            
+            <article class="setting-card">
+                <div class="setting-number">3</div>
+                <div class="setting-info">
+                    <strong>Staples</strong>
+                    <p>Lattes and Flat Whites</p>
+                </div>
+            </article>
+            
+            <article class="setting-card">
+                <div class="setting-number">4</div>
+                <div class="setting-info">
+                    <strong>Body</strong>
+                    <p>Cappuccinos or adding "weight" to thin milk</p>
+                </div>
+            </article>
+            
+            <article class="setting-card">
+                <div class="setting-number">5</div>
+                <div class="setting-info">
+                    <strong>Cold</strong>
+                    <p>Silky emulsions for Iced, Cold Brew & Frappés</p>
+                </div>
+            </article>
+            
+            <article class="size-chart">
+                <h3>Machine Output Reference</h3>
+                <div class="size-row header-row" role="row">
+                    <span class="size-label">Size</span>
+                    <span class="size-coffee">Coffee</span>
+                    <span class="size-milk">Milk</span>
+                </div>
+                <div class="size-row" role="row">
+                    <span class="size-label">S</span>
+                    <span class="size-coffee">180ml</span>
+                    <span class="size-milk">100-120ml</span>
+                </div>
+                <div class="size-row" role="row">
+                    <span class="size-label">M</span>
+                    <span class="size-coffee">235ml</span>
+                    <span class="size-milk">150-180ml</span>
+                </div>
+                <div class="size-row" role="row">
+                    <span class="size-label">M+</span>
+                    <span class="size-coffee">295ml</span>
+                    <span class="size-milk">200-220ml</span>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Recipe Detail Modal -->
+    <dialog id="recipe-modal" class="modal" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <div class="modal-handle" aria-hidden="true"></div>
+            <button class="modal-close" aria-label="Close recipe">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <div id="recipe-detail" class="recipe-detail"></div>
+        </div>
+    </dialog>
+
+    <script src="app.js"></script>
+</body>
+</html>
