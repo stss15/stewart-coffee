@@ -157,12 +157,12 @@
 
     .screen.active {
         display: flex;
-        animation: screenEnter 0.4s var(--ease-out) forwards;
+        animation: screenEnter 0.6s ease forwards;
     }
 
     @keyframes screenEnter {
-        from { opacity: 0; transform: translateY(12px); }
-        to { opacity: 1; transform: translateY(0); }
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
 
     /* ============================================
@@ -198,12 +198,12 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        animation: landingEnter 0.8s var(--ease-out);
+        animation: landingEnter 0.8s ease;
     }
 
     @keyframes landingEnter {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
 
     .landing-logo {
@@ -238,23 +238,14 @@
         font-size: var(--text-lg);
         font-weight: 600;
         min-width: 140px;
-        transition: all 0.4s var(--ease-out);
         box-shadow: 
             var(--shadow-md),
             0 0 20px rgba(212, 168, 75, 0.3);
-    }
-
-    .enter-btn:hover,
-    .enter-btn:focus {
-        transform: translateY(-2px);
-        box-shadow: 
-            var(--shadow-lg),
-            0 0 30px rgba(212, 168, 75, 0.4);
+        transition: opacity 0.2s ease;
     }
 
     .enter-btn:active {
-        transform: translateY(0);
-        transition: all 0.15s ease;
+        opacity: 0.8;
     }
 
     /* ============================================
@@ -325,30 +316,17 @@
         border-radius: var(--radius-lg);
         padding: var(--space-md);
         text-align: center;
-        transition: all 0.4s var(--ease-out);
-        box-shadow: 
-            var(--shadow-md),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        box-shadow: var(--shadow-md);
         min-height: 120px;
         display: flex;
         flex-direction: column;
         justify-content: center;
-    }
-
-    .menu-card:hover,
-    .menu-card:focus {
-        transform: translateY(-4px);
-        background: linear-gradient(145deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%);
-        box-shadow: 
-            var(--shadow-lg),
-            inset 0 1px 0 rgba(255, 255, 255, 0.15),
-            0 0 30px rgba(212, 168, 75, 0.15);
-        border-color: rgba(212, 168, 75, 0.3);
+        transition: opacity 0.2s ease, background 0.2s ease;
     }
 
     .menu-card:active {
-        transform: translateY(-2px);
-        transition: all 0.15s ease;
+        opacity: 0.7;
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
     }
 
     .card-icon {
@@ -390,8 +368,8 @@
         border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: var(--radius-full);
         color: var(--text-muted);
-        transition: all 0.2s var(--ease-out);
         z-index: 10;
+        transition: opacity 0.2s ease;
     }
 
     .exit-btn svg {
@@ -400,15 +378,8 @@
         stroke-width: 2;
     }
 
-    .exit-btn:hover,
-    .exit-btn:focus {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.25);
-        color: var(--foam);
-    }
-
     .exit-btn:active {
-        transform: scale(0.92);
+        opacity: 0.6;
     }
 
     /* ============================================
@@ -436,17 +407,11 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: var(--radius-md);
         color: var(--foam);
-        transition: all 0.2s var(--ease-out);
-    }
-
-    .back-btn:hover,
-    .back-btn:focus {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.2);
+        transition: opacity 0.2s ease;
     }
 
     .back-btn:active {
-        transform: scale(0.92);
+        opacity: 0.6;
     }
 
     .header-title {
@@ -613,40 +578,16 @@
         padding: var(--space-md);
         margin-bottom: var(--space-md);
         cursor: pointer;
-        transition: all 0.4s var(--ease-out);
         text-align: left;
         width: 100%;
         position: relative;
-        overflow: hidden;
         box-shadow: var(--shadow-sm);
-    }
-
-    .recipe-card::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(212, 168, 75, 0.1) 0%, transparent 50%);
-        opacity: 0;
-        transition: opacity 0.4s ease;
-    }
-
-    .recipe-card:hover::before,
-    .recipe-card:focus::before {
-        opacity: 1;
-    }
-
-    .recipe-card:hover,
-    .recipe-card:focus {
-        transform: translateY(-3px);
-        border-color: rgba(212, 168, 75, 0.3);
-        box-shadow: 
-            var(--shadow-lg),
-            0 0 20px rgba(212, 168, 75, 0.1);
+        transition: opacity 0.2s ease, background 0.2s ease;
     }
 
     .recipe-card:active {
-        transform: translateY(-1px);
-        transition: all 0.15s ease;
+        opacity: 0.7;
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
     }
 
     .recipe-header {
@@ -829,13 +770,19 @@
         overflow-y: auto;
         padding: var(--space-sm) var(--space-md) var(--space-lg);
         padding-bottom: calc(var(--space-lg) + var(--safe-bottom));
-        animation: modalSlideUp 0.4s var(--ease-spring);
+        animation: modalSlideUp 0.5s ease-out;
         position: relative;
     }
 
     @keyframes modalSlideUp {
-        from { opacity: 0; transform: translateY(100%); }
-        to { opacity: 1; transform: translateY(0); }
+        from { 
+            opacity: 0; 
+            transform: translateY(40px); 
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
     }
 
     .modal-handle {
@@ -857,18 +804,12 @@
         background: rgba(255, 255, 255, 0.1);
         border-radius: var(--radius-full);
         color: var(--text-secondary);
-        transition: all 0.2s var(--ease-out);
         z-index: 10;
-    }
-
-    .modal-close:hover,
-    .modal-close:focus {
-        background: rgba(255, 255, 255, 0.15);
-        color: var(--foam);
+        transition: opacity 0.2s ease;
     }
 
     .modal-close:active {
-        transform: scale(0.92);
+        opacity: 0.6;
     }
 
     /* ============================================
