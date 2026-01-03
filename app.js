@@ -145,8 +145,8 @@ const recipes = Object.freeze({
 
 // App state
 const state = {
-    currentScreen: 'landing',
-    navigationHistory: ['landing'],
+    currentScreen: 'menu',
+    navigationHistory: ['menu'],
     touchStartX: 0,
     touchStartY: 0,
     isModalOpen: false
@@ -182,7 +182,7 @@ function init() {
     window.addEventListener('popstate', handlePopState);
 
     // Initial history entry
-    history.replaceState({ screen: 'landing' }, '', '');
+    history.replaceState({ screen: 'menu' }, '', '');
 
     console.log('☕ Stewart Coffee App loaded successfully!');
 }
@@ -251,7 +251,7 @@ function setupModal() {
 
 /**
  * Navigate to a screen with animation
- * Uses a flat history model: only landing and current page in history
+ * Uses a flat history model: menu is home, one level deep to sub-pages
  */
 function navigateTo(screenId, addToHistory = true) {
     const currentScreen = document.querySelector('.screen.active');
@@ -272,18 +272,19 @@ function navigateTo(screenId, addToHistory = true) {
     state.currentScreen = screenId;
 
     // Flat history management:
-    // - Landing is the base (always in history)
-    // - Only one level deep from landing
+    // - Menu is the base (home screen)
+    // - Sub-pages replace state so back always returns to menu
     if (addToHistory) {
-        if (previousScreen === 'landing') {
-            // Going from landing to somewhere: push new state
+        if (previousScreen === 'menu' && screenId !== 'menu' && screenId !== 'exit-screen') {
+            // Going from menu to a sub-page: push state
             history.pushState({ screen: screenId }, '', '');
-        } else if (screenId === 'landing') {
-            // Going back to landing: go back in history
-            history.back();
+        } else if (screenId === 'menu') {
+            // Going back to menu: use history.back if we can, otherwise just navigate
+            if (previousScreen !== 'menu' && previousScreen !== 'exit-screen') {
+                history.back();
+            }
         } else {
-            // Navigating between non-landing screens: replace state
-            // This keeps history flat (back always goes to landing)
+            // Navigating between sub-pages: replace state (keeps history flat)
             history.replaceState({ screen: screenId }, '', '');
         }
     }
@@ -302,7 +303,7 @@ function performNavigation(currentScreen, targetScreen) {
 
 /**
  * Handle browser back/forward navigation
- * With flat history, back always goes to landing
+ * With flat history, back always goes to menu (home)
  */
 function handlePopState(e) {
     // Close modal if open first
@@ -313,8 +314,8 @@ function handlePopState(e) {
         return;
     }
 
-    // Get target screen from state (defaults to landing)
-    const screenId = e.state?.screen ?? 'landing';
+    // Get target screen from state (defaults to menu)
+    const screenId = e.state?.screen ?? 'menu';
     
     // Perform navigation without history manipulation
     const currentScreen = document.querySelector('.screen.active');
@@ -412,10 +413,8 @@ function setupSwipeGestures() {
                 if (parentScreen) {
                     navigateTo(parentScreen);
                     triggerHaptic();
-                } else if (state.currentScreen === 'menu') {
-                    navigateTo('landing');
-                    triggerHaptic();
                 }
+                // Don't allow swipe-back from menu (it's the home screen now)
             }
         }
     }, { passive: true });
@@ -434,9 +433,8 @@ function setupKeyboardNavigation() {
             
             if (parentScreen) {
                 navigateTo(parentScreen);
-            } else if (state.currentScreen === 'menu') {
-                navigateTo('landing');
             }
+            // Menu is home, no further back
         }
     });
 }
@@ -453,17 +451,16 @@ function setupExitButton() {
 
 /**
  * Exit the app
- * Returns to landing screen (the "closed" state of the app)
- * User can then close the browser tab manually if needed
+ * Shows exit screen with option to return
  */
 function exitApp() {
     triggerHaptic();
     
-    // Navigate back to landing screen
-    navigateTo('landing', false);
+    // Navigate to exit screen
+    navigateTo('exit-screen', false);
     
-    // Clear history so back button doesn't re-enter the app
-    history.replaceState({ screen: 'landing' }, '', '');
+    // Replace history so back button returns to menu
+    history.replaceState({ screen: 'menu' }, '', '');
 }
 
 /**

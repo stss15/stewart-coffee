@@ -24,32 +24,8 @@
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <!-- Landing/Splash Screen -->
-    <main id="landing" class="screen active" data-screen="landing">
-        <div class="landing-bg"></div>
-        <div class="landing-content">
-            <div class="landing-logo-container">
-                <img src="logo.png" alt="Stewart Coffee" class="landing-logo" width="220" height="220">
-                <div class="logo-glow"></div>
-            </div>
-            <div class="landing-text">
-                <h1>Stewart</h1>
-                <h2>Coffee</h2>
-            </div>
-            <button class="enter-btn" data-navigate="menu" aria-label="Enter the coffee shop">
-                <span class="enter-btn-text">Enter</span>
-                <svg class="enter-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </button>
-        </div>
-        <div class="steam steam-1"></div>
-        <div class="steam steam-2"></div>
-        <div class="steam steam-3"></div>
-    </main>
-
-    <!-- Main Menu -->
-    <main id="menu" class="screen" data-screen="menu" data-parent="landing">
+    <!-- Main Menu (Start Screen) -->
+    <main id="menu" class="screen active" data-screen="menu">
         <div class="menu-bg-logo" aria-hidden="true">
             <img src="logo.png" alt="" width="300" height="300">
         </div>
@@ -452,6 +428,17 @@
                     <span class="size-milk">200-220ml</span>
                 </div>
             </article>
+        </div>
+    </main>
+
+    <!-- Exit/Closed Screen -->
+    <main id="exit-screen" class="screen" data-screen="exit">
+        <div class="exit-content">
+            <img src="logo.png" alt="Stewart Coffee" class="exit-logo" width="120" height="120">
+            <p class="exit-message">Thanks for visiting!</p>
+            <button class="return-btn" data-navigate="menu">
+                <span>Return to Menu</span>
+            </button>
         </div>
     </main>
 
