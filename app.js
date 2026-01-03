@@ -176,6 +176,7 @@ function init() {
     setupModal();
     setupSwipeGestures();
     setupKeyboardNavigation();
+    setupExitButton();
 
     // Handle browser back/forward
     window.addEventListener('popstate', handlePopState);
@@ -250,6 +251,7 @@ function setupModal() {
 
 /**
  * Navigate to a screen with animation
+ * Uses a flat history model: only landing and current page in history
  */
 function navigateTo(screenId, addToHistory = true) {
     const currentScreen = document.querySelector('.screen.active');
@@ -266,13 +268,24 @@ function navigateTo(screenId, addToHistory = true) {
         performNavigation(currentScreen, targetScreen);
     }
 
-    // Update state
+    const previousScreen = state.currentScreen;
     state.currentScreen = screenId;
 
-    // Manage history
+    // Flat history management:
+    // - Landing is the base (always in history)
+    // - Only one level deep from landing
     if (addToHistory) {
-        state.navigationHistory.push(screenId);
-        history.pushState({ screen: screenId }, '', '');
+        if (previousScreen === 'landing') {
+            // Going from landing to somewhere: push new state
+            history.pushState({ screen: screenId }, '', '');
+        } else if (screenId === 'landing') {
+            // Going back to landing: go back in history
+            history.back();
+        } else {
+            // Navigating between non-landing screens: replace state
+            // This keeps history flat (back always goes to landing)
+            history.replaceState({ screen: screenId }, '', '');
+        }
     }
 }
 
@@ -289,23 +302,27 @@ function performNavigation(currentScreen, targetScreen) {
 
 /**
  * Handle browser back/forward navigation
+ * With flat history, back always goes to landing
  */
 function handlePopState(e) {
-    const screenId = e.state?.screen ?? 'home';
-    
-    // Close modal if open
+    // Close modal if open first
     if (state.isModalOpen) {
         closeRecipe();
+        // Push state back to prevent actual navigation
+        history.pushState({ screen: state.currentScreen }, '', '');
         return;
     }
 
-    // Navigate without adding to history
-    navigateTo(screenId, false);
+    // Get target screen from state (defaults to landing)
+    const screenId = e.state?.screen ?? 'landing';
     
-    // Update navigation history
-    const index = state.navigationHistory.lastIndexOf(screenId);
-    if (index !== -1) {
-        state.navigationHistory = state.navigationHistory.slice(0, index + 1);
+    // Perform navigation without history manipulation
+    const currentScreen = document.querySelector('.screen.active');
+    const targetScreen = document.getElementById(screenId);
+    
+    if (targetScreen && currentScreen !== targetScreen) {
+        performNavigation(currentScreen, targetScreen);
+        state.currentScreen = screenId;
     }
 }
 
@@ -396,7 +413,7 @@ function setupSwipeGestures() {
                     navigateTo(parentScreen);
                     triggerHaptic();
                 } else if (state.currentScreen === 'menu') {
-                    navigateTo('home');
+                    navigateTo('landing');
                     triggerHaptic();
                 }
             }
@@ -418,10 +435,44 @@ function setupKeyboardNavigation() {
             if (parentScreen) {
                 navigateTo(parentScreen);
             } else if (state.currentScreen === 'menu') {
-                navigateTo('home');
+                navigateTo('landing');
             }
         }
     });
+}
+
+/**
+ * Setup exit button
+ */
+function setupExitButton() {
+    const exitBtn = document.getElementById('exit-btn');
+    if (exitBtn) {
+        exitBtn.addEventListener('click', exitApp);
+    }
+}
+
+/**
+ * Exit the app
+ * Works in both standalone PWA mode and browser
+ */
+function exitApp() {
+    triggerHaptic();
+    
+    // Try to close the window (works in standalone PWA mode)
+    if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+        // In standalone mode, navigate to landing first then try to close
+        navigateTo('landing', false);
+        setTimeout(() => {
+            window.close();
+        }, 300);
+    }
+    
+    // If window.close() doesn't work (browser mode), go back to landing
+    // This gives a "closed" feel and user can close tab manually
+    navigateTo('landing');
+    
+    // Clear the history stack by replacing with landing
+    history.replaceState({ screen: 'landing' }, '', '');
 }
 
 /**
