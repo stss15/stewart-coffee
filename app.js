@@ -145,8 +145,7 @@ const recipes = Object.freeze({
 
 // App state
 const state = {
-    currentScreen: 'menu',
-    navigationHistory: ['menu'],
+    currentScreen: 'landing',
     touchStartX: 0,
     touchStartY: 0,
     isModalOpen: false
@@ -181,10 +180,40 @@ function init() {
     // Handle browser back/forward
     window.addEventListener('popstate', handlePopState);
 
-    // Initial history entry
-    history.replaceState({ screen: 'menu' }, '', '');
+    // Always start fresh at landing - no session memory
+    forceResetToLanding();
 
     console.log('☕ Stewart Coffee App loaded successfully!');
+}
+
+/**
+ * Force reset to landing screen on every page load
+ * Prevents session/cache from resuming mid-app
+ */
+function forceResetToLanding() {
+    // Hide all screens
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+    
+    // Show landing
+    const landing = document.getElementById('landing');
+    if (landing) {
+        landing.classList.add('active');
+    }
+    
+    // Reset state
+    state.currentScreen = 'landing';
+    state.isModalOpen = false;
+    
+    // Close modal if somehow open
+    const modal = document.getElementById('recipe-modal');
+    if (modal?.open) {
+        modal.close();
+    }
+    
+    // Reset history
+    history.replaceState({ screen: 'landing' }, '', '');
 }
 
 /**
@@ -251,7 +280,7 @@ function setupModal() {
 
 /**
  * Navigate to a screen with animation
- * Uses a flat history model: menu is home, one level deep to sub-pages
+ * Simple flat history: landing → menu → sub-pages
  */
 function navigateTo(screenId, addToHistory = true) {
     const currentScreen = document.querySelector('.screen.active');
@@ -271,20 +300,16 @@ function navigateTo(screenId, addToHistory = true) {
     const previousScreen = state.currentScreen;
     state.currentScreen = screenId;
 
-    // Flat history management:
-    // - Menu is the base (home screen)
-    // - Sub-pages replace state so back always returns to menu
+    // Simple history: only push when going deeper, replace otherwise
     if (addToHistory) {
-        if (previousScreen === 'menu' && screenId !== 'menu' && screenId !== 'exit-screen') {
-            // Going from menu to a sub-page: push state
+        if (screenId === 'landing') {
+            // Going to landing: replace (it's the base)
+            history.replaceState({ screen: 'landing' }, '', '');
+        } else if (previousScreen === 'landing' || previousScreen === 'menu') {
+            // Going from landing/menu to somewhere: push
             history.pushState({ screen: screenId }, '', '');
-        } else if (screenId === 'menu') {
-            // Going back to menu: use history.back if we can, otherwise just navigate
-            if (previousScreen !== 'menu' && previousScreen !== 'exit-screen') {
-                history.back();
-            }
         } else {
-            // Navigating between sub-pages: replace state (keeps history flat)
+            // Navigating between sub-pages: replace (keeps it flat)
             history.replaceState({ screen: screenId }, '', '');
         }
     }
@@ -303,19 +328,17 @@ function performNavigation(currentScreen, targetScreen) {
 
 /**
  * Handle browser back/forward navigation
- * With flat history, back always goes to menu (home)
  */
 function handlePopState(e) {
     // Close modal if open first
     if (state.isModalOpen) {
         closeRecipe();
-        // Push state back to prevent actual navigation
         history.pushState({ screen: state.currentScreen }, '', '');
         return;
     }
 
-    // Get target screen from state (defaults to menu)
-    const screenId = e.state?.screen ?? 'menu';
+    // Get target screen from state (defaults to landing)
+    const screenId = e.state?.screen ?? 'landing';
     
     // Perform navigation without history manipulation
     const currentScreen = document.querySelector('.screen.active');
@@ -414,7 +437,6 @@ function setupSwipeGestures() {
                     navigateTo(parentScreen);
                     triggerHaptic();
                 }
-                // Don't allow swipe-back from menu (it's the home screen now)
             }
         }
     }, { passive: true });
@@ -434,7 +456,6 @@ function setupKeyboardNavigation() {
             if (parentScreen) {
                 navigateTo(parentScreen);
             }
-            // Menu is home, no further back
         }
     });
 }
@@ -451,16 +472,16 @@ function setupExitButton() {
 
 /**
  * Exit the app
- * Shows exit screen with option to return
+ * Returns to landing screen (the "closed" state)
  */
 function exitApp() {
     triggerHaptic();
     
-    // Navigate to exit screen
-    navigateTo('exit-screen', false);
+    // Navigate to landing
+    navigateTo('landing', false);
     
-    // Replace history so back button returns to menu
-    history.replaceState({ screen: 'menu' }, '', '');
+    // Clear history
+    history.replaceState({ screen: 'landing' }, '', '');
 }
 
 /**

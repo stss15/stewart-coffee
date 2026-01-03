@@ -166,65 +166,93 @@
     }
 
     /* ============================================
-       Exit Screen
+       Landing Screen
        ============================================ */
-    #exit-screen {
+    #landing {
         justify-content: center;
         align-items: center;
         min-height: 100dvh;
-        background: linear-gradient(180deg, var(--espresso) 0%, var(--dark-roast) 100%);
+        background: linear-gradient(180deg, var(--espresso) 0%, var(--dark-roast) 50%, var(--medium-roast) 100%);
         text-align: center;
         padding: var(--space-lg);
+        position: relative;
+        overflow: hidden;
     }
 
-    .exit-content {
+    /* Subtle ambient glow */
+    #landing::before {
+        content: '';
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(212, 168, 75, 0.15) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .landing-content {
+        position: relative;
+        z-index: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
-        animation: fadeIn 0.5s var(--ease-out);
+        animation: landingEnter 0.8s var(--ease-out);
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: scale(0.95); }
-        to { opacity: 1; transform: scale(1); }
+    @keyframes landingEnter {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
-    .exit-logo {
-        width: 100px;
-        height: 100px;
+    .landing-logo {
+        width: clamp(160px, 40vw, 220px);
+        height: clamp(160px, 40vw, 220px);
         border-radius: var(--radius-full);
-        margin-bottom: var(--space-md);
-        opacity: 0.8;
-        box-shadow: var(--shadow-md);
-    }
-
-    .exit-message {
-        font-size: var(--text-lg);
-        color: var(--text-secondary);
         margin-bottom: var(--space-lg);
+        box-shadow: 
+            var(--shadow-lg),
+            0 0 60px rgba(212, 168, 75, 0.2);
     }
 
-    .return-btn {
-        display: flex;
-        align-items: center;
-        gap: var(--space-sm);
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+    .landing-title {
+        font-size: var(--text-2xl);
         color: var(--foam);
-        padding: var(--space-sm) var(--space-lg);
+        margin-bottom: var(--space-xs);
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .landing-subtitle {
+        font-size: var(--text-base);
+        color: var(--gold);
+        margin-bottom: var(--space-xl);
+        letter-spacing: 0.1em;
+    }
+
+    .enter-btn {
+        background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+        color: var(--espresso);
+        padding: var(--space-md) var(--space-xl);
         border-radius: var(--radius-full);
-        font-size: var(--text-sm);
-        font-weight: 500;
-        transition: all 0.3s var(--ease-out);
+        font-size: var(--text-lg);
+        font-weight: 600;
+        min-width: 140px;
+        transition: all 0.3s var(--ease-spring);
+        box-shadow: 
+            var(--shadow-md),
+            0 0 20px rgba(212, 168, 75, 0.3);
     }
 
-    .return-btn:hover,
-    .return-btn:focus {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.3);
+    .enter-btn:hover,
+    .enter-btn:focus {
+        transform: scale(1.05);
+        box-shadow: 
+            var(--shadow-lg),
+            0 0 30px rgba(212, 168, 75, 0.4);
     }
 
-    .return-btn:active {
+    .enter-btn:active {
         transform: scale(0.98);
     }
 
