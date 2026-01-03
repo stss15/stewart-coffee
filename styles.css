@@ -475,39 +475,39 @@
         line-height: 1.4;
     }
 
-    /* Exit Button */
+    /* Exit Button - positioned top right corner */
     .exit-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: var(--space-sm);
-        width: 100%;
-        margin-top: var(--space-lg);
-        padding: var(--space-md);
-        background: transparent;
+        position: absolute;
+        top: var(--space-md);
+        right: var(--space-md);
+        top: calc(var(--space-md) + var(--safe-top));
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        background: rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: var(--radius-md);
+        border-radius: var(--radius-full);
         color: var(--text-muted);
-        font-size: var(--text-sm);
-        font-weight: 500;
-        transition: all 0.3s var(--ease-out);
+        transition: all 0.2s var(--ease-out);
+        z-index: 10;
     }
 
     .exit-btn svg {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
         stroke-width: 2;
     }
 
     .exit-btn:hover,
     .exit-btn:focus {
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.15);
         border-color: rgba(255, 255, 255, 0.25);
-        color: var(--text-secondary);
+        color: var(--foam);
     }
 
     .exit-btn:active {
-        transform: scale(0.98);
+        transform: scale(0.92);
     }
 
     /* ============================================

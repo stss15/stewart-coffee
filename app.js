@@ -453,25 +453,16 @@ function setupExitButton() {
 
 /**
  * Exit the app
- * Works in both standalone PWA mode and browser
+ * Returns to landing screen (the "closed" state of the app)
+ * User can then close the browser tab manually if needed
  */
 function exitApp() {
     triggerHaptic();
     
-    // Try to close the window (works in standalone PWA mode)
-    if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
-        // In standalone mode, navigate to landing first then try to close
-        navigateTo('landing', false);
-        setTimeout(() => {
-            window.close();
-        }, 300);
-    }
+    // Navigate back to landing screen
+    navigateTo('landing', false);
     
-    // If window.close() doesn't work (browser mode), go back to landing
-    // This gives a "closed" feel and user can close tab manually
-    navigateTo('landing');
-    
-    // Clear the history stack by replacing with landing
+    // Clear history so back button doesn't re-enter the app
     history.replaceState({ screen: 'landing' }, '', '');
 }
 
